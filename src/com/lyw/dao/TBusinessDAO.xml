@@ -6,9 +6,6 @@
     <result column="bNum" jdbcType="VARCHAR" property="bnum" />
     <result column="bType" jdbcType="VARCHAR" property="btype" />
     <result column="bMark" jdbcType="VARCHAR" property="bmark" />
-    <result column="bdId" jdbcType="INTEGER" property="bdid" />
-    <result column="bdName" jdbcType="VARCHAR" property="bdname" />
-    <result column="bdPerson" jdbcType="VARCHAR" property="bdperson" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    bId, bNum, bType, bMark, bdId, bdName, bdPerson
+    bId, bNum, bType, bMark
   </sql>
   <select id="selectByExample" parameterType="com.lyw.bean.TBusinessExample" resultMap="BaseResultMap">
     select
@@ -111,11 +108,9 @@
   </delete>
   <insert id="insert" parameterType="com.lyw.bean.TBusiness">
     insert into t_business (bId, bNum, bType, 
-      bMark, bdId, bdName, 
-      bdPerson)
+      bMark)
     values (#{bid,jdbcType=INTEGER}, #{bnum,jdbcType=VARCHAR}, #{btype,jdbcType=VARCHAR}, 
-      #{bmark,jdbcType=VARCHAR}, #{bdid,jdbcType=INTEGER}, #{bdname,jdbcType=VARCHAR}, 
-      #{bdperson,jdbcType=VARCHAR})
+      #{bmark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lyw.bean.TBusiness">
     insert into t_business
@@ -132,15 +127,6 @@
       <if test="bmark != null">
         bMark,
       </if>
-      <if test="bdid != null">
-        bdId,
-      </if>
-      <if test="bdname != null">
-        bdName,
-      </if>
-      <if test="bdperson != null">
-        bdPerson,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="bid != null">
@@ -154,15 +140,6 @@
       </if>
       <if test="bmark != null">
         #{bmark,jdbcType=VARCHAR},
-      </if>
-      <if test="bdid != null">
-        #{bdid,jdbcType=INTEGER},
-      </if>
-      <if test="bdname != null">
-        #{bdname,jdbcType=VARCHAR},
-      </if>
-      <if test="bdperson != null">
-        #{bdperson,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -187,15 +164,6 @@
       <if test="record.bmark != null">
         bMark = #{record.bmark,jdbcType=VARCHAR},
       </if>
-      <if test="record.bdid != null">
-        bdId = #{record.bdid,jdbcType=INTEGER},
-      </if>
-      <if test="record.bdname != null">
-        bdName = #{record.bdname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.bdperson != null">
-        bdPerson = #{record.bdperson,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -206,10 +174,7 @@
     set bId = #{record.bid,jdbcType=INTEGER},
       bNum = #{record.bnum,jdbcType=VARCHAR},
       bType = #{record.btype,jdbcType=VARCHAR},
-      bMark = #{record.bmark,jdbcType=VARCHAR},
-      bdId = #{record.bdid,jdbcType=INTEGER},
-      bdName = #{record.bdname,jdbcType=VARCHAR},
-      bdPerson = #{record.bdperson,jdbcType=VARCHAR}
+      bMark = #{record.bmark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -226,15 +191,6 @@
       <if test="bmark != null">
         bMark = #{bmark,jdbcType=VARCHAR},
       </if>
-      <if test="bdid != null">
-        bdId = #{bdid,jdbcType=INTEGER},
-      </if>
-      <if test="bdname != null">
-        bdName = #{bdname,jdbcType=VARCHAR},
-      </if>
-      <if test="bdperson != null">
-        bdPerson = #{bdperson,jdbcType=VARCHAR},
-      </if>
     </set>
     where bId = #{bid,jdbcType=INTEGER}
   </update>
@@ -242,10 +198,20 @@
     update t_business
     set bNum = #{bnum,jdbcType=VARCHAR},
       bType = #{btype,jdbcType=VARCHAR},
-      bMark = #{bmark,jdbcType=VARCHAR},
-      bdId = #{bdid,jdbcType=INTEGER},
-      bdName = #{bdname,jdbcType=VARCHAR},
-      bdPerson = #{bdperson,jdbcType=VARCHAR}
+      bMark = #{bmark,jdbcType=VARCHAR}
     where bId = #{bid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectTwoTable"   resultType="map">
+    select * from t_business b
+        join t_detail d on b.bId = d.bId
+  </select>
+
+  <insert id="insertt" parameterType="map" >
+        insert into tbusiness (bId, bNum, bType,
+      bMark ,bdid,bdname,bdperson) values (bId =#{bId},)
+  </insert>
+  <delete id="delete" >
+    delete from  tbusiness where bId=#{bId}
+  </delete>
 </mapper>

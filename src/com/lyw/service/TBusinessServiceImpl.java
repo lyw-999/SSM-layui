@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("tBusinessService")
 public class TBusinessServiceImpl implements TBusinessService{
@@ -56,5 +57,14 @@ public class TBusinessServiceImpl implements TBusinessService{
     	return tBusinessDAO.updateByPrimaryKey(record);
     }
 
+	@Override
+	public List<Map> selectTwoTable() {
+		return tBusinessDAO.selectTwoTable();
+	}
 
+
+	@Override
+	public int delete(Integer id) {
+		return tBusinessDAO.delete(id);
+	}
 }

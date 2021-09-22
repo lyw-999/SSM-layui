@@ -21,9 +21,19 @@ public class PageController {
         return "add";
     }
 
+    @RequestMapping("/businessList")
+    public String businessList(){
+        return "businessList";
+    }
+
     @RequestMapping("/addBusiness")
     public String addBusiness(){
         return "addBusiness";
+    }
+
+    @RequestMapping("/banliBusiness")
+    public String banliBusiness(){
+        return "banliBusiness";
     }
 
     @RequestMapping("/vuedemo000")

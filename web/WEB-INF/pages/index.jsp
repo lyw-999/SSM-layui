@@ -6,6 +6,6 @@
   </head>
   <body>
   <a href="/addBusiness">添加业务</a>
-           <a href="#">业务列表</a>
+           <a href="/businessList">业务列表</a>
   </body>
 </html>
